@@ -1,4 +1,4 @@
-class AstronomyObjectOfTheDay {
+class Apod {
   final String copyright;
   final String date;
   final String explanation;
@@ -8,7 +8,7 @@ class AstronomyObjectOfTheDay {
   final String title;
   final String url;
 
-  AstronomyObjectOfTheDay({
+  Apod({
     this.copyright,
     this.date,
     this.explanation,
@@ -19,8 +19,8 @@ class AstronomyObjectOfTheDay {
     this.url,
   });
 
-  factory AstronomyObjectOfTheDay.fromJson(Map<String, dynamic> json) {
-    return AstronomyObjectOfTheDay(
+  factory Apod.fromJson(Map<String, dynamic> json) {
+    return Apod(
       copyright: json['copyright'],
       date: json['date'],
       explanation: json['explanation'],

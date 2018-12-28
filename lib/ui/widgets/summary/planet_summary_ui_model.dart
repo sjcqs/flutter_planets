@@ -48,7 +48,7 @@ class PlanetSummaryUIModelMapper {
     );
   }
 
-  PlanetSummaryUIModel mapAstronomyObjectOfTheDay(AstronomyObjectOfTheDay data) {
+  PlanetSummaryUIModel mapApod(Apod data) {
     return PlanetSummaryUIModel(
       id: "APOD_ID",
       title: "Picture of The Day",

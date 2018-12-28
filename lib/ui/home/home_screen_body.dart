@@ -3,6 +3,7 @@ import 'package:planets/data/model/apod/apod.dart';
 import 'package:planets/data/model/planet/planet.dart';
 import 'package:planets/data/repository/apod_repository.dart';
 import 'package:planets/data/repository/planet_repository.dart';
+import 'package:planets/res/res.dart';
 import 'package:planets/ui/detail/planet_detail.dart';
 import 'package:planets/ui/detail/planet_detail_ui_model.dart';
 import 'package:planets/ui/widgets/summary/planet_summary.dart';
@@ -11,7 +12,7 @@ import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
 class PlanetChildDelegate extends SliverChildBuilderDelegate {
   PlanetChildDelegate(
     List<Planet> planets,
-    Future<AstronomyObjectOfTheDay> future,
+    Future<Apod> future,
     PlanetSummaryUIModelMapper summaryMapper,
     PlanetDetailUIModelMapper detailMapper,
   ) : super(
@@ -28,7 +29,7 @@ class PlanetChildDelegate extends SliverChildBuilderDelegate {
 
   static Widget _buildItem(
       int index,
-      Future<AstronomyObjectOfTheDay> future,
+      Future<Apod> future,
       PlanetSummaryUIModelMapper summaryMapper,
       List<Planet> planets,
       PlanetDetailUIModelMapper detailMapper,
@@ -61,17 +62,17 @@ class PlanetChildDelegate extends SliverChildBuilderDelegate {
     );
   }
 
-  static FutureBuilder<AstronomyObjectOfTheDay> _buildAstronomyObject(
-    Future<AstronomyObjectOfTheDay> future,
+  static FutureBuilder<Apod> _buildAstronomyObject(
+    Future<Apod> future,
     PlanetSummaryUIModelMapper summaryMapper,
     PlanetDetailUIModelMapper detailMapper,
   ) {
-    return FutureBuilder<AstronomyObjectOfTheDay>(
+    return FutureBuilder<Apod>(
       future: future,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          var summary = summaryMapper.mapAstronomyObjectOfTheDay(snapshot.data);
-          var detail = detailMapper.mapAstronomyObjectOfTheDay(snapshot.data);
+          var summary = summaryMapper.mapApod(snapshot.data);
+          var detail = detailMapper.mapApod(snapshot.data);
           return PlanetSummaryWidget(
             summary,
             () => Navigator.of(context).push(
@@ -96,8 +97,7 @@ class PlanetChildDelegate extends SliverChildBuilderDelegate {
 
 class HomeBody extends StatelessWidget {
   final planets = PlanetRepository.planets;
-  final Future<AstronomyObjectOfTheDay> astronomyObjectOfTheDay =
-      AstronomyObjectOfTheDayRepository.fetchAstronomyObjectOfTheDay();
+  final Future<Apod> apod = ApodRepository.fetchApod();
   final PlanetSummaryUIModelMapper summaryMapper = PlanetSummaryUIModelMapper();
   final PlanetDetailUIModelMapper detailMapper = PlanetDetailUIModelMapper();
 
@@ -105,16 +105,16 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-      color: Color(0xFF736AB7),
+      color: AppColors.deluge,
       child: CustomScrollView(
         scrollDirection: Axis.vertical,
         slivers: <Widget>[
           SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0),
+            padding: const EdgeInsets.symmetric(vertical: Dimens.unit3),
             sliver: SliverList(
               delegate: PlanetChildDelegate(
                 planets,
-                astronomyObjectOfTheDay,
+                apod,
                 summaryMapper,
                 detailMapper,
               ),

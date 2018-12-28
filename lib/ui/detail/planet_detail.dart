@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planets/res/style.dart';
+import 'package:planets/res/res.dart';
 import 'package:planets/ui/detail/planet_detail_ui_model.dart';
 import 'package:planets/ui/widgets/summary/planet_summary.dart';
 import 'package:planets/ui/widgets/separator.dart';
@@ -16,7 +16,7 @@ class PlanetDetailScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
-        color: Color(0xFF736AB7),
+        color: AppColors.deluge,
         child: Stack(
           children: <Widget>[
             _buildBackground(),
@@ -40,16 +40,17 @@ class PlanetDetailScreen extends StatelessWidget {
 
   Widget _buildContent() {
     return ListView(
-      padding: EdgeInsets.fromLTRB(0.0, 72.0, 0.0, 32.0),
+      padding: EdgeInsets.fromLTRB(0.0, Dimens.unit8, 0.0, Dimens.unit4),
       children: <Widget>[
         PlanetSummaryWidget.vertical(model.summaryUiModel),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: Dimens.unit3, vertical: Dimens.unit3),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0x00736AB7),
-                Color(0xFF736AB7),
+                AppColors.deluge00,
+                AppColors.deluge,
               ],
               stops: [0.0, 0.1],
               begin: const FractionalOffset(0.0, 0.0),
@@ -60,11 +61,11 @@ class PlanetDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "overview".toUpperCase(),
-                style: Style.headerTextStyle,
+                Strings.planetDetailTitle,
+                style: AppTextStyle.headerTextStyle,
               ),
               Separator(),
-              Text(model.description, style: Style.commonTextStyle)
+              Text(model.description, style: AppTextStyle.commonTextStyle)
             ],
           ),
         )
@@ -79,8 +80,8 @@ class PlanetDetailScreen extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color(0x00736AB7),
-            Color(0xFF736AB7),
+            AppColors.deluge00,
+            AppColors.deluge,
           ],
           stops: [0.0, 0.9],
           begin: const FractionalOffset(0.0, 0.0),
@@ -91,13 +92,14 @@ class PlanetDetailScreen extends StatelessWidget {
   }
 
   Container _buildBackground() {
+    final planetDetailBackgroundHeight = Dimens.planetDetailBackgroundHeight;
     return Container(
       child: Image.network(
         model.background,
         fit: BoxFit.cover,
-        height: 300.0,
+        height: planetDetailBackgroundHeight,
       ),
-      constraints: BoxConstraints.expand(height: 300.0),
+      constraints: BoxConstraints.expand(height: planetDetailBackgroundHeight),
     );
   }
 }

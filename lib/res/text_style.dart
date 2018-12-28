@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:planets/res/colors.dart';
 
-class Style {
+class AppTextStyle {
+  AppTextStyle._();
+
   static final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
   static final regularTextStyle = baseTextStyle.copyWith(
-    color: const Color(0xffb6b2df),
+    color: AppColors.coldPurple,
     fontSize: 9.0,
     fontWeight: FontWeight.w400,
   );
@@ -14,8 +17,13 @@ class Style {
     fontWeight: FontWeight.w600,
   );
   static final commonTextStyle = baseTextStyle.copyWith(
-    color: const Color(0xffb6b2df),
+    color: AppColors.coldPurple,
     fontSize: 14.0,
     fontWeight: FontWeight.w400,
+  );
+  static final appBarTextStyle = baseTextStyle.copyWith(
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 36.0,
   );
 }

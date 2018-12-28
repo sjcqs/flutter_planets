@@ -1,5 +1,6 @@
 import 'package:planets/data/model/apod/apod.dart';
 import 'package:planets/data/model/planet/planet.dart';
+import 'package:planets/res/strings.dart';
 import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
 
 class PlanetDetailUIModel {
@@ -17,8 +18,6 @@ class PlanetDetailUIModel {
 }
 
 class PlanetDetailUIModelMapper {
-  static const TITLE = "OVERVIEW";
-
   PlanetDetailUIModel mapPlanet(Planet planet) {
     return PlanetDetailUIModel(
         summaryUiModel: PlanetSummaryUIModel(
@@ -32,15 +31,15 @@ class PlanetDetailUIModelMapper {
           rightIcon: "res/img/ic_gravity.png",
         ),
         background: planet.picture,
-        title: TITLE,
+        title: Strings.planetDetailTitle.toUpperCase(),
         description: planet.description);
   }
 
-  PlanetDetailUIModel mapAstronomyObjectOfTheDay(AstronomyObjectOfTheDay data) {
+  PlanetDetailUIModel mapApod(Apod data) {
     return PlanetDetailUIModel(
       summaryUiModel: PlanetSummaryUIModel(
         id: "APOD_ID",
-        title: "Picture of The Day",
+        title: Strings.apodTitle,
         subtitle: data.title,
         image: "res/img/nasa.png",
         leftField: data.date,
@@ -49,7 +48,7 @@ class PlanetDetailUIModelMapper {
         rightIcon: "res/img/ic_author.png",
       ),
       background: data.url,
-      title: TITLE,
+      title: Strings.planetDetailTitle.toUpperCase(),
       description: data.explanation,
     );
   }
