@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class TransparentAppBar extends StatelessWidget {
   final bool displayBackButton;
-
   TransparentAppBar({this.displayBackButton = true});
 
   @override

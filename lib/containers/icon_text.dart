@@ -7,7 +7,6 @@ class CompoundIconText extends Expanded {
     @required String text,
     int flex = 1,
   }) : super(flex: flex, child: _contentRow(icon, text));
-
   static Row _contentRow(String icon, String text) => Row(children: <Widget>[
         Image.asset(icon, height: 12.0),
         Container(width: Dimens.unit1),

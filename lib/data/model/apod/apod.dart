@@ -1,4 +1,5 @@
 class Apod {
+  final String id = "APOD";
   final String copyright;
   final String date;
   final String explanation;
@@ -21,7 +22,7 @@ class Apod {
 
   factory Apod.fromJson(Map<String, dynamic> json) {
     return Apod(
-      copyright: json['copyright'],
+      copyright: json['copyright'] ?? "",
       date: json['date'],
       explanation: json['explanation'],
       hdUrl: json['hdurl'],

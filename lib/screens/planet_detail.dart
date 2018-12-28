@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:planets/containers/transparent_app_bar.dart';
-import 'package:planets/res/res.dart';
-import 'package:planets/models/planet_detail.dart';
 import 'package:planets/containers/planet_summary.dart';
 import 'package:planets/containers/separator.dart';
+import 'package:planets/containers/transparent_app_bar.dart';
+import 'package:planets/models/planet_detail.dart';
 import 'package:planets/models/planet_summary.dart';
+import 'package:planets/res/res.dart';
 
 class PlanetDetailScreen extends StatelessWidget {
   final PlanetDetailUIModel model;
   final PlanetSummaryUIModelMapper mapper = PlanetSummaryUIModelMapper();
-
   PlanetDetailScreen(this.model);
 
   @override

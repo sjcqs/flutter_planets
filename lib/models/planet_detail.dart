@@ -1,14 +1,13 @@
 import 'package:planets/data/model/apod/apod.dart';
 import 'package:planets/data/model/planet/planet.dart';
-import 'package:planets/res/strings.dart';
 import 'package:planets/models/planet_summary.dart';
+import 'package:planets/res/strings.dart';
 
 class PlanetDetailUIModel {
   final PlanetSummaryUIModel summaryUiModel;
   final String background;
   final String title;
   final String description;
-
   PlanetDetailUIModel({
     this.summaryUiModel,
     this.background,

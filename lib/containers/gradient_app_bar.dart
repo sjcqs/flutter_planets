@@ -4,7 +4,6 @@ import 'package:planets/res/res.dart';
 class GradientAppBar extends StatelessWidget {
   final String title;
   final double barHeight = 66.0;
-
   GradientAppBar(this.title);
 
   @override

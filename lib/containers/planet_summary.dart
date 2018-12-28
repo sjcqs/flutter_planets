@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:planets/containers/icon_text.dart';
-import 'package:planets/res/res.dart';
 import 'package:planets/containers/separator.dart';
 import 'package:planets/models/planet_summary.dart';
+import 'package:planets/res/res.dart';
+import 'package:planets/utils/visibility.dart';
 
 enum Orientation { VERTICAL, HORIZONTAL }
 
-typedef OnPlanetClickedCallback();
+typedef OnPlanetClickedCallback(String id);
 
 class PlanetSummaryWidget extends StatelessWidget {
   final PlanetSummaryUIModel model;
   final Orientation orientation;
   final OnPlanetClickedCallback onPlanetClickedCallback;
-
   bool get isHorizontal => orientation == Orientation.HORIZONTAL;
-
   PlanetSummaryWidget(this.model, this.onPlanetClickedCallback,
       {this.orientation = Orientation.HORIZONTAL});
 
   PlanetSummaryWidget.vertical(this.model)
       : orientation = Orientation.VERTICAL,
         onPlanetClickedCallback = null;
-
   @override
   Widget build(BuildContext context) {
     final planetThumbnail = Container(
@@ -38,7 +36,6 @@ class PlanetSummaryWidget extends StatelessWidget {
         ),
       ),
     );
-
     final planetCardContent = Container(
       margin: EdgeInsets.fromLTRB(
         isHorizontal ? 76.0 : Dimens.unit2,
@@ -46,7 +43,6 @@ class PlanetSummaryWidget extends StatelessWidget {
         Dimens.unit2,
         Dimens.unit2,
       ),
-      constraints: BoxConstraints.expand(),
       child: Column(
         crossAxisAlignment:
             isHorizontal ? CrossAxisAlignment.start : CrossAxisAlignment.center,
@@ -59,27 +55,35 @@ class PlanetSummaryWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CompoundIconText(
-                icon: model.leftIcon,
-                text: model.leftField,
-                flex: isHorizontal ? 1 : 0,
+              VisibilityModifier(
+                visibility: model.leftField.isNotEmpty
+                    ? VisibilityFlag.visible
+                    : VisibilityFlag.invisible,
+                child: CompoundIconText(
+                  icon: model.leftIcon,
+                  text: model.leftField,
+                  flex: isHorizontal ? 1 : 0,
+                ),
               ),
               Container(
                 width: isHorizontal ? 0 : Dimens.unit2,
               ),
-              CompoundIconText(
-                icon: model.rightIcon,
-                text: model.rightField,
-                flex: isHorizontal ? 1 : 0,
+              VisibilityModifier(
+                visibility: model.rightField.isNotEmpty
+                    ? VisibilityFlag.visible
+                    : VisibilityFlag.gone,
+                child: CompoundIconText(
+                  icon: model.rightIcon,
+                  text: model.rightField,
+                  flex: isHorizontal ? 1 : 0,
+                ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
-
     final planetCard = Container(
-      height: isHorizontal ? 124.0 : 154.0,
       margin: isHorizontal
           ? EdgeInsets.only(left: Dimens.unit5)
           : EdgeInsets.only(top: Dimens.unit8),
@@ -96,19 +100,16 @@ class PlanetSummaryWidget extends StatelessWidget {
             ),
           ]),
     );
-
     return GestureDetector(
       onTap: () {
-        if (onPlanetClickedCallback != null) {
-          onPlanetClickedCallback();
-        }
+        if (onPlanetClickedCallback != null) onPlanetClickedCallback(model.id);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(
             vertical: Dimens.unit2, horizontal: Dimens.unit3),
         child: Stack(
           children: <Widget>[
-            planetCard,
+            Container(child: planetCard),
             planetThumbnail,
           ],
         ),

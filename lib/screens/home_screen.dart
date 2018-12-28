@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:planets/res/strings.dart';
 import 'package:planets/containers/gradient_app_bar.dart';
 import 'package:planets/containers/home_body.dart';
+import 'package:planets/res/strings.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

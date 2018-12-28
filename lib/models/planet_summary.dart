@@ -10,19 +10,7 @@ class PlanetSummaryUIModel {
   final String leftIcon;
   final String rightField;
   final String rightIcon;
-
   const PlanetSummaryUIModel({
-    this.id,
-    this.title,
-    this.subtitle,
-    this.image,
-    this.leftField,
-    this.leftIcon,
-    this.rightField,
-    this.rightIcon,
-  });
-
-  const PlanetSummaryUIModel.detail({
     this.id,
     this.title,
     this.subtitle,
@@ -50,7 +38,7 @@ class PlanetSummaryUIModelMapper {
 
   PlanetSummaryUIModel mapApod(Apod data) {
     return PlanetSummaryUIModel(
-      id: "APOD_ID",
+      id: data.id,
       title: "Picture of The Day",
       subtitle: data.title,
       image: "res/img/nasa.png",

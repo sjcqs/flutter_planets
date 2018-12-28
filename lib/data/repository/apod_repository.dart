@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:planets/models/constants.dart';
-import 'package:planets/data/model/apod/apod.dart';
 import 'package:http/http.dart' as http;
+import 'package:planets/data/model/apod/apod.dart';
+import 'package:planets/models/constants.dart';
 
 class ApodRepository {
   static const URL = "https://api.nasa.gov/planetary/apod?api_key=";
-
   static Future<Apod> fetchApod() async {
     final response = await http.get("$URL${Constants.NASA_API_KEY}");
     if (response.statusCode == 200) {
