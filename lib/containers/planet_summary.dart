@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:planets/containers/icon_text.dart';
 import 'package:planets/res/res.dart';
-import 'package:planets/ui/widgets/separator.dart';
-import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
+import 'package:planets/containers/separator.dart';
+import 'package:planets/models/planet_summary.dart';
 
 enum Orientation { VERTICAL, HORIZONTAL }
 
 typedef OnPlanetClickedCallback();
 
 class PlanetSummaryWidget extends StatelessWidget {
-  final PlanetSummaryUIModel uiModel;
+  final PlanetSummaryUIModel model;
   final Orientation orientation;
   final OnPlanetClickedCallback onPlanetClickedCallback;
 
-  bool isHorizontal() => orientation == Orientation.HORIZONTAL;
+  bool get isHorizontal => orientation == Orientation.HORIZONTAL;
 
-  PlanetSummaryWidget(this.uiModel, this.onPlanetClickedCallback,
+  PlanetSummaryWidget(this.model, this.onPlanetClickedCallback,
       {this.orientation = Orientation.HORIZONTAL});
 
-  PlanetSummaryWidget.vertical(this.uiModel)
+  PlanetSummaryWidget.vertical(this.model)
       : orientation = Orientation.VERTICAL,
         onPlanetClickedCallback = null;
 
@@ -29,63 +30,48 @@ class PlanetSummaryWidget extends StatelessWidget {
           ? FractionalOffset.centerLeft
           : FractionalOffset.center,
       child: Hero(
-        tag: Strings.planetIconHeroTag(uiModel.id),
+        tag: Strings.planetIconHeroTag(model.id),
         child: Image(
-          image: AssetImage(uiModel.image),
+          image: AssetImage(model.image),
           height: Dimens.unit10,
           width: Dimens.unit10,
         ),
       ),
     );
 
-    Row _planetValue(String image, String text) {
-      return Row(
-        children: <Widget>[
-          Image.asset(image, height: 12.0),
-          Container(width: Dimens.unit1),
-          Text(text, style: AppTextStyle.regularTextStyle),
-        ],
-      );
-    }
-
     final planetCardContent = Container(
       margin: EdgeInsets.fromLTRB(
-        isHorizontal() ? 76.0 : Dimens.unit2,
-        isHorizontal() ? Dimens.unit2 : 42.0,
+        isHorizontal ? 76.0 : Dimens.unit2,
+        isHorizontal ? Dimens.unit2 : 42.0,
         Dimens.unit2,
         Dimens.unit2,
       ),
       constraints: BoxConstraints.expand(),
       child: Column(
-        crossAxisAlignment: isHorizontal()
-            ? CrossAxisAlignment.start
-            : CrossAxisAlignment.center,
+        crossAxisAlignment:
+            isHorizontal ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: <Widget>[
           Container(height: 4.0),
-          Text(
-            uiModel.title,
-            style: AppTextStyle.headerTextStyle,
-          ),
+          Text(model.title, style: AppTextStyle.headerTextStyle),
           Container(height: 10.0),
-          Text(
-            uiModel.subtitle,
-            style: AppTextStyle.subHeaderTextStyle,
-          ),
+          Text(model.subtitle, style: AppTextStyle.subHeaderTextStyle),
           Separator(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                flex: isHorizontal() ? 1 : 0,
-                child: _planetValue(uiModel.leftIcon, uiModel.leftField),
+              CompoundIconText(
+                icon: model.leftIcon,
+                text: model.leftField,
+                flex: isHorizontal ? 1 : 0,
               ),
               Container(
-                width: isHorizontal() ? 0 : Dimens.unit2,
+                width: isHorizontal ? 0 : Dimens.unit2,
               ),
-              Expanded(
-                flex: isHorizontal() ? 1 : 0,
-                child: _planetValue(uiModel.rightIcon, uiModel.rightField),
-              )
+              CompoundIconText(
+                icon: model.rightIcon,
+                text: model.rightField,
+                flex: isHorizontal ? 1 : 0,
+              ),
             ],
           )
         ],
@@ -93,8 +79,8 @@ class PlanetSummaryWidget extends StatelessWidget {
     );
 
     final planetCard = Container(
-      height: isHorizontal() ? 124.0 : 154.0,
-      margin: isHorizontal()
+      height: isHorizontal ? 124.0 : 154.0,
+      margin: isHorizontal
           ? EdgeInsets.only(left: Dimens.unit5)
           : EdgeInsets.only(top: Dimens.unit8),
       child: planetCardContent,

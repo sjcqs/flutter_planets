@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:planets/constants.dart';
+import 'package:planets/models/constants.dart';
 import 'package:planets/data/model/apod/apod.dart';
 import 'package:http/http.dart' as http;
 

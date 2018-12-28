@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:planets/containers/transparent_app_bar.dart';
 import 'package:planets/res/res.dart';
-import 'package:planets/ui/detail/planet_detail_ui_model.dart';
-import 'package:planets/ui/widgets/summary/planet_summary.dart';
-import 'package:planets/ui/widgets/separator.dart';
-import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
+import 'package:planets/models/planet_detail.dart';
+import 'package:planets/containers/planet_summary.dart';
+import 'package:planets/containers/separator.dart';
+import 'package:planets/models/planet_summary.dart';
 
 class PlanetDetailScreen extends StatelessWidget {
   final PlanetDetailUIModel model;
@@ -22,18 +23,9 @@ class PlanetDetailScreen extends StatelessWidget {
             _buildBackground(),
             _buildGradient(),
             _buildContent(),
-            _buildToolbar(context)
+            TransparentAppBar()
           ],
         ),
-      ),
-    );
-  }
-
-  Container _buildToolbar(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      child: BackButton(
-        color: Colors.white,
       ),
     );
   }

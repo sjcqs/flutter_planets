@@ -22,12 +22,7 @@ class GradientAppBar extends StatelessWidget {
           tileMode: TileMode.clamp,
         ),
       ),
-      child: Center(
-        child: Text(
-          title,
-          style: AppTextStyle.appBarTextStyle
-        ),
-      ),
+      child: Center(child: Text(title, style: AppTextStyle.appBarTextStyle)),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 class AppColors {
-
   AppColors._();
 
   static const coldPurple = Color(0xffb6b2df);

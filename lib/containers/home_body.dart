@@ -4,10 +4,10 @@ import 'package:planets/data/model/planet/planet.dart';
 import 'package:planets/data/repository/apod_repository.dart';
 import 'package:planets/data/repository/planet_repository.dart';
 import 'package:planets/res/res.dart';
-import 'package:planets/ui/detail/planet_detail.dart';
-import 'package:planets/ui/detail/planet_detail_ui_model.dart';
-import 'package:planets/ui/widgets/summary/planet_summary.dart';
-import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
+import 'package:planets/screens/planet_detail.dart';
+import 'package:planets/models/planet_detail.dart';
+import 'package:planets/containers/planet_summary.dart';
+import 'package:planets/models/planet_summary.dart';
 
 class PlanetChildDelegate extends SliverChildBuilderDelegate {
   PlanetChildDelegate(
@@ -83,7 +83,7 @@ class PlanetChildDelegate extends SliverChildBuilderDelegate {
                 ),
           );
         } else if (snapshot.hasError) {
-          return Container();
+          return null;
         }
         return Center(child: CircularProgressIndicator());
       },

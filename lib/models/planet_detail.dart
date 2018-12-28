@@ -1,7 +1,7 @@
 import 'package:planets/data/model/apod/apod.dart';
 import 'package:planets/data/model/planet/planet.dart';
 import 'package:planets/res/strings.dart';
-import 'package:planets/ui/widgets/summary/planet_summary_ui_model.dart';
+import 'package:planets/models/planet_summary.dart';
 
 class PlanetDetailUIModel {
   final PlanetSummaryUIModel summaryUiModel;
